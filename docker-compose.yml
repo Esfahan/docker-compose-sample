@@ -1,0 +1,19 @@
+version: '2'
+services:
+    #db:
+    #    build: ./db
+    #    env_file:
+    #        - .env
+    web:
+        build: ./web
+        volumes:
+            - ./web/code:/var/www/html/web_app
+        ports:
+            - 80
+        hostname: web_app
+    rproxy:
+        build: ./rproxy
+        links:
+            - web:web_app
+        ports:
+            - 80:80
